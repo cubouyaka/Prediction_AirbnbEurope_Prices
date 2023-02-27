@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 
 
@@ -35,7 +36,7 @@ def handling_categorical_data(df, column_name):
         column_name: a string. The name of the df column we want to refactor.
     Returns:
         A pair (df, indexes) containing the DataFrame 'df' modified, and a Dictionary 'indexes' containing values of
-        df[column_name] and its index (the new value in df[column_name]
+        df[column_name] and its index (the new value in df[column_name].
     """
     current_i = 0
     indexes = {}
@@ -46,12 +47,32 @@ def handling_categorical_data(df, column_name):
     return df, indexes
 
 
+def handling_categorical_datas(df):
+    """Handling Categorical Data of all the columns in the DataFrame 'df'
+    Args:
+        df: a DataFrame. The DataFrame we want to modify.
+    Returns:
+        A pair (df, indexes) containing the DataFrame 'df' modified now containing only integer values to each category,
+        and a set
+    """
+    indexes = {}
+    for column in df.columns:
+        if len(df[column]) > 0 and not np.isreal(df[column][0]):  # check if it doesn't contain numerical values
+            df, indexes[column] = handling_categorical_data(df, column)  # convert values in numerical values
+
+    return df, indexes
+
+
 # Load the data into a DataFrame
 directory = 'airbnb'
-df = load_data(directory)
+data = load_data(directory)
 
-# Examine the features of the dataset
-# print(df['room_type'].head(20))
-# print(df.info())
-# print(df.describe())
-# print(df.isnull().sum())  # number of null values
+# # Examine the features of the dataset
+# print(data['room_type'].head(20))
+# print(data.info())
+# print(data.describe())
+# print(data.isnull().sum())  # number of null values
+
+# Handling Categorical Data in data and storing the associate indexes
+data, indexes = handling_categorical_datas(data)
+
