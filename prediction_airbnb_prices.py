@@ -41,7 +41,7 @@ def handling_categorical_data(df, column_name):
         column_name: a string. The name of the df column we want to refactor.
     Returns:
         A pair (df, indexes) containing the DataFrame 'df' modified, and a Dictionary 'indexes' containing values of
-        df[column_name] and its index (the new value in df[column_name].
+        df[column_name] and its index (the new value in df[column_name]).
     """
     current_i = 0
     indexes = {}
