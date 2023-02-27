@@ -13,4 +13,3 @@ data = load_data(directory)
 
 # Handling Categorical Data in data and storing the associate indexes
 data, indexes = handling_categorical_datas(data)
-
