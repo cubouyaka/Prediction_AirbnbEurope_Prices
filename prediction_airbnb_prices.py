@@ -3,8 +3,13 @@ import numpy as np
 import pandas as pd
 
 
-# Load all cities data from path_to_directory into a DataFrame returned
 def load_data(path_to_directory):
+    """ Load all cities data from path_to_directory into a DataFrame returned
+    Args:
+        path_to_directory: a String. The path to the directory where all .csv files are.
+    Returns:
+        A DataFrame df containing all the data.
+    """
     dataframes = []
     # Loop through each file in the directory
     for filename in os.listdir(path_to_directory):
