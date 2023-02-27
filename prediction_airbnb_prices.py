@@ -26,11 +26,32 @@ def load_data(path_to_directory):
     return combined_df
 
 
+def handling_categorical_data(df, column_name):
+    """Handling Categorical Data by replacing df[column_name] values by an associate index,
+        returning this DataFrame modified and the Label encoding (unique integer value to each category)
+        as a dictionary 'indexes'
+    Args:
+        df: a DataFrame. The DataFrame we want to modify.
+        column_name: a string. The name of the df column we want to refactor.
+    Returns:
+        A pair (df, indexes) containing the DataFrame 'df' modified, and a Dictionary 'indexes' containing values of
+        df[column_name] and its index (the new value in df[column_name]
+    """
+    current_i = 0
+    indexes = {}
+    for value in df[column_name].unique():
+        indexes[value] = current_i
+        current_i += 1
+    df[column_name] = df[column_name].map(indexes)
+    return df, indexes
+
+
 # Load the data into a DataFrame
 directory = 'airbnb'
 df = load_data(directory)
 
 # Examine the features of the dataset
-print(df.head())
-print(df.info())
-print(df.describe())
+# print(df['room_type'].head(20))
+# print(df.info())
+# print(df.describe())
+# print(df.isnull().sum())  # number of null values
